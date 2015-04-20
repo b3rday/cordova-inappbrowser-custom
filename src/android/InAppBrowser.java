@@ -74,6 +74,7 @@ public class InAppBrowser extends CordovaPlugin {
     // private static final String BLANK = "_blank";
     private static final String EXIT_EVENT = "exit";
     private static final String LOCATION = "location";
+    private static final String POST_NAME = "postname";
     private static final String HIDDEN = "hidden";
     private static final String LOAD_START_EVENT = "loadstart";
     private static final String LOAD_STOP_EVENT = "loadstop";
@@ -89,6 +90,7 @@ public class InAppBrowser extends CordovaPlugin {
     private boolean openWindowHidden = false;
     private boolean clearAllCache= false;
     private boolean clearSessionCache=false;
+    private String postname = "Post Name";
 
     /**
      * Executes the request and returns PluginResult.
@@ -108,6 +110,12 @@ public class InAppBrowser extends CordovaPlugin {
             }
             final String target = t;
             final HashMap<String, Boolean> features = parseFeature(args.optString(2));
+
+
+            String postname = args.optString(3);
+            if( postname != null && !postname.equals("") || !t.equals(NULL) ){
+                ( postname );
+            }
             
             Log.d(LOG_TAG, "target = " + target);
             
@@ -239,6 +247,21 @@ public class InAppBrowser extends CordovaPlugin {
             return false;
         }
         return true;
+    }
+
+
+    /**
+     * Set Post Name
+     */
+    public void setPostName( String postname ){
+        this.postname = postname;
+    }
+
+    /**
+     * Get Post Name
+     */
+    public String getPostName(){
+        return this.postname;
     }
 
     /**
@@ -590,7 +613,7 @@ public class InAppBrowser extends CordovaPlugin {
                 closeLayoutParams.addRule(RelativeLayout.ALIGN_LEFT);
                 close.setLayoutParams(closeLayoutParams);
                 forward.setContentDescription("Close Button");
-                close.setText("Schließen");
+                close.setText( getPostName() );
                 close.setTextSize(20.0f);
                 close.setTextColor(android.graphics.Color.GRAY);
                 close.setId(5);
