@@ -102,11 +102,14 @@ public class InAppBrowser extends CordovaPlugin {
      */
     public boolean execute(String action, CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
         if (action.equals("open")) {
+
+
             this.callbackContext = callbackContext;
+
             final String url = args.getString(0);
 
-            final String postname = args.getString(1);
-            setPostName(postname);
+            final String p = args.getString(1);
+            setPostName(p);
             
             String t = args.optString(2);
             if (t == null || t.equals("") || t.equals(NULL)) {
@@ -333,6 +336,7 @@ public class InAppBrowser extends CordovaPlugin {
             HashMap<String, Boolean> map = new HashMap<String, Boolean>();
             StringTokenizer features = new StringTokenizer(optString, ",");
             StringTokenizer option;
+
             while(features.hasMoreElements()) {
                 option = new StringTokenizer(features.nextToken(), "=");
                 if (option.hasMoreElements()) {
