@@ -104,19 +104,17 @@ public class InAppBrowser extends CordovaPlugin {
         if (action.equals("open")) {
             this.callbackContext = callbackContext;
             final String url = args.getString(0);
-            String t = args.optString(1);
+
+            final String postname = args.getString(1);
+            setPostName(postname);
+            
+            String t = args.optString(2);
             if (t == null || t.equals("") || t.equals(NULL)) {
                 t = SELF;
             }
             final String target = t;
-            final HashMap<String, Boolean> features = parseFeature(args.optString(2));
+            final HashMap<String, Boolean> features = parseFeature(args.optString(3));
 
-
-            String postname = args.optString(3);
-            if( postname != null && !postname.equals("") || !t.equals(NULL) ){
-                ( postname );
-            }
-            
             Log.d(LOG_TAG, "target = " + target);
             
             this.cordova.getActivity().runOnUiThread(new Runnable() {

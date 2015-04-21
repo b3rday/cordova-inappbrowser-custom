@@ -81,8 +81,8 @@
     CDVPluginResult* pluginResult;
 
     NSString* url = [command argumentAtIndex:0];
-    NSString* target = [command argumentAtIndex:1 withDefault:kInAppBrowserTargetSelf];
-    NSString* options = [command argumentAtIndex:2 withDefault:@"" andClass:[NSString class]];
+    NSString* target = [command argumentAtIndex:2 withDefault:kInAppBrowserTargetSelf];
+    NSString* options = [command argumentAtIndex:3 withDefault:@"" andClass:[NSString class]];
 
     self.callbackId = command.callbackId;
 
