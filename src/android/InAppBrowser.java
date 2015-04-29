@@ -107,16 +107,21 @@ public class InAppBrowser extends CordovaPlugin {
             this.callbackContext = callbackContext;
 
             final String url = args.getString(0);
-
-            final String p = args.getString(1);
-            setPostName(p);
             
-            String t = args.optString(2);
+            String t = args.optString(1);
             if (t == null || t.equals("") || t.equals(NULL)) {
                 t = SELF;
             }
+
             final String target = t;
-            final HashMap<String, Boolean> features = parseFeature(args.optString(3));
+
+            //PDC TEAM 
+            //Set close button caption and return option string
+            String featureString = parseCloseButtonCaption( args.optString(2) );
+
+            //PDC TEAM
+            //past to parseFeature function string without close button caption
+            final HashMap<String, Boolean> features = parseFeature(featureString);
 
             Log.d(LOG_TAG, "target = " + target);
             
@@ -321,6 +326,46 @@ public class InAppBrowser extends CordovaPlugin {
                 }
             }
         });
+    }
+
+
+    /**
+     * Set Close Buton Capption string from option string ant return string without it
+     *
+     * @param optString
+     * @return newOptionString
+     */
+    private String parseCloseButtonCaption(String  optString){
+
+        String newOptString;
+
+
+        if ( !( optString.equals(NULL) ) ) {
+
+            String[] commaSeparetedArray = optString.split(",");
+
+            for( int i = 0; i < commaSeparetedArray.length; i++ ){
+
+                if( commaSeparetedArray[i].toLowerCase().contains("closebuttoncaption=") ){
+
+                    String[] splitToCloseButtonCaption = commaSeparetedArray[i].split("closebuttoncaption=");
+
+                    newOptString = optString.replace( commaSeparetedArray[i], "");
+
+                    setPostName( splitToCloseButtonCaption[1] );
+
+
+                    return newOptString;
+
+                }
+
+            }
+
+        }
+        newOptString = optString;
+
+        return newOptString;
+
     }
 
     /**

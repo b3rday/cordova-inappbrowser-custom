@@ -20,7 +20,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
            id="com.likemag.cordova.inappbrowsercustom"
-      version="0.0.8">
+      version="0.1.0">
 
     <name>CustomInAppBrowser</name>
     <description>Custom Cordova InAppBrowser Plugin</description>
